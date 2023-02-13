@@ -1,4 +1,4 @@
-export default interface IPet {
+export default interface ICar {
   id?:string;
   model:string;
   year:number;
