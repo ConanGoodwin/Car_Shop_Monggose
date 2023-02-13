@@ -1,6 +1,6 @@
-import ICar from '../Interfaces/Car.interface';
+import ICar from '../Interfaces/ICar';
 
-export default class CarDomain implements ICar {
+export default class Car implements ICar {
   private _id:string;
   private _model:string;
   private _year:number;

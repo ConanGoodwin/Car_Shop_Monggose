@@ -14,6 +14,10 @@ abstract class ModelCRUD<T> {
   public async findAll(): Promise<T[]> {
     return this._model.find();
   }
+
+  public async create(obj: T): Promise<T> {
+    return this._model.create({ ...obj });
+  }
 }
 
 export default ModelCRUD;
