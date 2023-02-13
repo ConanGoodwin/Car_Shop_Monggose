@@ -10,19 +10,14 @@ export default class CarDomain implements ICar {
   private _doorsQty:number;
   private _seatsQty:number;
   
-  constructor(
-    model:string,
-    year:number,
-    color: string,
-    buyValue: number,
-    doorsQty: number,
-    seatsQty: number,
-  ) {
+  constructor(objCar: ICar) {
+    const { model, year, color, status = false, buyValue, doorsQty, seatsQty } = objCar;
+
     this._id = '0';
     this._model = model;
     this._year = year;
     this._color = color;
-    this._status = false;
+    this._status = status;
     this._buyValue = buyValue;
     this._doorsQty = doorsQty;
     this._seatsQty = seatsQty;
