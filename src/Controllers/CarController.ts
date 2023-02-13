@@ -13,11 +13,13 @@ export default class CarController {
   }
 
   public async create(req: Request, res: Response) {
+    const status = false;
+
     const car: ICar = {
       model: req.body.model,
       year: req.body.year,
       color: req.body.color,
-      status: req.body.status,
+      status: req.body.status || status,
       buyValue: req.body.buyValue,
       doorsQty: req.body.doorsQty,
       seatsQty: req.body.seatsQty,
@@ -25,8 +27,9 @@ export default class CarController {
 
     const service = new CarService();
     const { type, message } = await service.create(car);
+    const newMessage: ICar = { id: (message as ICar).id, ...car };
 
-    if (!type) return res.status(201).json(message);
+    if (!type) return res.status(201).json(newMessage);
 
     return res.status(500).json({ message });
   }
