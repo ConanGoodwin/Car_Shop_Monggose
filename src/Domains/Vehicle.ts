@@ -19,51 +19,51 @@ export default class Vehicle {
     this.buyValue = buyValue;
   }
 
-  set setId(id: string) {
-    this.id = id;
-  }
+  // set setId(id: string) {
+  //   this.id = id;
+  // }
 
-  get getId() {
-    return this.id;
-  }
+  // get getId() {
+  //   return this.id;
+  // }
 
-  set setModel(model: string) {
-    this.model = model;
-  }
+  // set setModel(model: string) {
+  //   this.model = model;
+  // }
 
-  get getModel() {
-    return this.model;
-  }
+  // get getModel() {
+  //   return this.model;
+  // }
 
-  set setYear(year: number) {
-    this.year = year;
-  }
+  // set setYear(year: number) {
+  //   this.year = year;
+  // }
 
-  get getYear() {
-    return this.year;
-  }
+  // get getYear() {
+  //   return this.year;
+  // }
 
-  set setColor(color: string) {
-    this.color = color;
-  }
+  // set setColor(color: string) {
+  //   this.color = color;
+  // }
 
-  get getColor() {
-    return this.color;
-  }
+  // get getColor() {
+  //   return this.color;
+  // }
 
-  set setStatus(status: boolean) {
-    this.status = status;
-  }
+  // set setStatus(status: boolean) {
+  //   this.status = status;
+  // }
 
-  get getStatus() {
-    return this.status;
-  }
+  // get getStatus() {
+  //   return this.status;
+  // }
 
-  set setBuyValue(buyValue: number) {
-    this.buyValue = buyValue;
-  }
+  // set setBuyValue(buyValue: number) {
+  //   this.buyValue = buyValue;
+  // }
 
-  get getBuyValue() {
-    return this.buyValue;
-  }
+  // get getBuyValue() {
+  //   return this.buyValue;
+  // }
 }
