@@ -3,6 +3,8 @@ import ICar from '../Interfaces/ICar';
 import IService from '../Interfaces/IService';
 import CarODM from '../Models/CarODM';
 
+const CAR_NOT_FOUND = 'Car not found';
+
 export default class CarService {
   // constructor(private carODM: Model<ICar>) {}
 
@@ -32,6 +34,18 @@ export default class CarService {
 
     if (message) return { type: null, message };
 
-    return { type: 'NOT_FOUND', message: 'Car not found' };
+    return { type: 'NOT_FOUND', message: CAR_NOT_FOUND };
+  };
+
+  public update = async (id: string, obj: Partial<ICar>): Promise<IService<ICar>> => {
+    const carODM = new CarODM();
+    const message = await carODM.update(obj, id);
+
+    if (message === 'INVALID') return { type: 'INVALID', message: 'Invalid mongo id' };
+    if (message === 'NOT_FOUND') return { type: 'NOT_FOUND', message: CAR_NOT_FOUND };
+
+    if (message) return { type: null, message };
+
+    return { type: 'NOT_FOUND', message: CAR_NOT_FOUND };
   };
 }

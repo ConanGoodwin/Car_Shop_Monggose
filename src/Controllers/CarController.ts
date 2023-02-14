@@ -27,6 +27,25 @@ export default class CarController {
     return res.status(statusHttp[type as StatusType]).json({ message });
   }
 
+  public async update(req: Request, res: Response) {
+    const service = new CarService();
+    const { id } = req.params;
+    const car: ICar = {
+      model: req.body.model,
+      year: req.body.year,
+      color: req.body.color,
+      status: req.body.status || false,
+      buyValue: req.body.buyValue,
+      doorsQty: req.body.doorsQty,
+      seatsQty: req.body.seatsQty,
+    };
+    const { type, message } = await service.update(id, car);
+
+    if (!type) return res.status(statusHttp.OK).json({ id, ...car });
+
+    return res.status(statusHttp[type as StatusType]).json({ message });
+  }
+
   public async create(req: Request, res: Response) {
     const status = false;
 

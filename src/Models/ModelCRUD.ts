@@ -1,4 +1,4 @@
-import { isValidObjectId, model, Model, models, Schema } from 'mongoose';
+import { isValidObjectId, model, Model, models, Schema, UpdateQuery } from 'mongoose';
 
 abstract class ModelCRUD<T> {
   protected _model: Model<T>;
@@ -23,6 +23,16 @@ abstract class ModelCRUD<T> {
     if (!isValidObjectId(id)) return 'invalid';
     
     return this._model.findById({ _id: id });
+  }
+
+  public async update(obj: Partial<T>, _id: string): Promise<T | null | string> {
+    if (!isValidObjectId(_id)) return 'INVALID';
+    if (!this.findById(_id)) return 'NOT_FOUND';
+
+    return this._model.findByIdAndUpdate(
+      { _id },
+      { ...obj } as UpdateQuery<T>,
+    );
   }
 }
 
