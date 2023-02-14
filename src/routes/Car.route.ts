@@ -6,5 +6,6 @@ const carController = new CarController();
 
 CarRoute.post('/', carController.create);
 CarRoute.get('/', carController.findAll);
+CarRoute.get('/:id', carController.findById);
 
 export default CarRoute;

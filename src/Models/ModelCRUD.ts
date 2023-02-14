@@ -1,4 +1,4 @@
-import { model, Model, models, Schema } from 'mongoose';
+import { isValidObjectId, model, Model, models, Schema } from 'mongoose';
 
 abstract class ModelCRUD<T> {
   protected _model: Model<T>;
@@ -12,11 +12,22 @@ abstract class ModelCRUD<T> {
   }
 
   public async findAll(): Promise<T[]> {
-    return this._model.find();
+    // return this._model.find().select({ _id: 0, id: '$_id' });
+    // const result = await this._model.find({}, '-_id').select({ id: '$_id' });
+    const result = await this._model.find();
+    // const formatResult = result.map((item) => ({ ...item.year }));
+
+    return result;
   }
 
   public async create(obj: T): Promise<T> {
     return this._model.create({ ...obj });
+  }
+
+  public async findById(id: string): Promise<T | null | string> {
+    if (!isValidObjectId(id)) return 'invalid';
+    
+    return this._model.findById({ _id: id });
   }
 }
 
