@@ -5,7 +5,7 @@ import ModelCRUD from './ModelCRUD';
 export default class CarODM extends ModelCRUD<ICar> {
   constructor() {
     const schema = new Schema<ICar>({
-      // _id: { type: String, alias: 'id' },
+      // id: { type: String, required: false },
       model: { type: String, required: true },
       year: { type: Number, required: true },
       color: { type: String, required: true },

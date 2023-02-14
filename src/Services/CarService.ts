@@ -1,8 +1,11 @@
+// import { Model } from 'mongoose';
 import ICar from '../Interfaces/ICar';
 import IService from '../Interfaces/IService';
 import CarODM from '../Models/CarODM';
 
 export default class CarService {
+  // constructor(private carODM: Model<ICar>) {}
+
   public findAll = async (): Promise<IService<ICar>> => {
     const carODM = new CarODM();
     const message = await carODM.findAll();

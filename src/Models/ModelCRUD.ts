@@ -12,12 +12,7 @@ abstract class ModelCRUD<T> {
   }
 
   public async findAll(): Promise<T[]> {
-    // return this._model.find().select({ _id: 0, id: '$_id' });
-    // const result = await this._model.find({}, '-_id').select({ id: '$_id' });
-    const result = await this._model.find();
-    // const formatResult = result.map((item) => ({ ...item.year }));
-
-    return result;
+    return this._model.find();
   }
 
   public async create(obj: T): Promise<T> {
