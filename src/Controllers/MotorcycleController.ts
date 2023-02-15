@@ -20,9 +20,12 @@ export default class MotorcycleController {
   public async findById(req: Request, res: Response) {
     const service = new MotorcycleSevice();
     const { id } = req.params;
-    const { type, message } = await service.findById(id);
+    const result = await service.findById(id);
+    let { message } = result;
+    const { type } = result;
 
     if (!type) return res.status(statusHttp.OK).json(message);
+    if (type === 'NOT_FOUND') message = 'Motorcycle not found';
 
     return res.status(statusHttp[type as StatusType]).json({ message });
   }
@@ -39,9 +42,12 @@ export default class MotorcycleController {
       category: req.body.category,
       engineCapacity: req.body.engineCapacity,
     };
-    const { type, message } = await service.update(id, car);
+    const result = await service.update(id, car);
+    let { message } = result;
+    const { type } = result;
 
     if (!type) return res.status(statusHttp.OK).json({ id, ...car });
+    if (message === 'Car not Found') message = 'Motorcycle not found';
 
     return res.status(statusHttp[type as StatusType]).json({ message });
   }
