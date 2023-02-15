@@ -132,4 +132,40 @@ describe('Testes do serviço Car', function () {
       sinon.restore();
     });
   });
+
+  describe('Testa a atualização de um carro especifico', function () {
+    it('Testa se um carro é atualizado com sucesso', async function () {
+      sinon.stub(Model, 'findById').resolves(carOutPut);
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(carOutPut);
+  
+      const { type, message } = await new CarService().update('63ebdb90f4e0ac2072dd9bff', carInput);
+  
+      expect(type).to.be.equal(null);
+      expect(message).to.be.deep.equal(carOutPut);
+    });
+
+    it('Testa erro ao enviar um id no formato inválido', async function () {
+      sinon.stub(Model, 'findById').resolves(undefined);
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(carOutPut);
+  
+      const { type, message } = await new CarService().update('63ebd', carInput);
+  
+      expect(type).to.be.equal('INVALID');
+      expect(message).to.be.equal('Invalid mongo id');
+    });
+
+    it('Testa erro ao não encontrar o id', async function () {
+      sinon.stub(Model, 'findById').resolves(undefined);
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(carOutPut);
+  
+      const { type, message } = await new CarService().update('63ebdb90f4e0ac2072dd9bff', carInput);
+  
+      expect(type).to.be.equal('NOT_FOUND');
+      expect(message).to.be.equal('Car not found');
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+  });
 });

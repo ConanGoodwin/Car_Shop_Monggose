@@ -1,6 +1,6 @@
 import { isValidObjectId, model, Model, models, Schema, UpdateQuery } from 'mongoose';
 
-abstract class ModelCRUD<T> {
+abstract class AbstractODM<T> {
   protected _model: Model<T>;
   protected _schema: Schema;
   protected _modelName: string;
@@ -27,7 +27,8 @@ abstract class ModelCRUD<T> {
 
   public async update(obj: Partial<T>, _id: string): Promise<T | null | string> {
     if (!isValidObjectId(_id)) return 'INVALID';
-    if (!this.findById(_id)) return 'NOT_FOUND';
+    const loc = await this.findById(_id);
+    if (!loc) return 'NOT_FOUND';
 
     return this._model.findByIdAndUpdate(
       { _id },
@@ -36,4 +37,4 @@ abstract class ModelCRUD<T> {
   }
 }
 
-export default ModelCRUD;
+export default AbstractODM;
